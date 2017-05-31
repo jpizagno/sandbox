@@ -1,0 +1,17 @@
+
+Not included:
+id_rsa file for connection to github for repository cloning.
+MySQL database must be setup.   DDL files can be found in repo/scripts/*ddl*
+
+
+# to build:
+sudo docker build -t jpizagno/bookinghandler .
+
+# to run:
+sudo docker run -p 8080:80 -t -i jpizagno/bookinghandler
+
+# find webserver at:
+http://localhost:8080/bookingbootstrap/
+
+# to log in
+docker exec -it {container-id} bash

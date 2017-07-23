@@ -30,7 +30,7 @@ COPY config /var/www/html/bookingbootstrap/
 # open ports so user can see containers
 EXPOSE 22 80
 
-# start service
-CMD ["/usr/bin/supervisord"]
+# to start service enter this as command:
+# CMD ["/usr/bin/supervisord"]
 
  

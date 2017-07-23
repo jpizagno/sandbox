@@ -32,5 +32,3 @@ EXPOSE 22 80
 
 # to start service enter this as command:
 # CMD ["/usr/bin/supervisord"]
-
- 

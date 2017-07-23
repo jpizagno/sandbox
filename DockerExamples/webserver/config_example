@@ -2,4 +2,4 @@
 db_database     = bookings
 db_user     = <usernmae>
 db_password = <password>
-db_ip = 192.160.68.105 
+db_ip = 192.160.68.001 

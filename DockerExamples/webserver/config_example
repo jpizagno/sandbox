@@ -1,5 +1,5 @@
 [database]
 db_database     = bookings
 db_user     = <my-usernmae>
-db_password = <password>
+db_password = <my-password>
 db_ip = 192.160.68.001 

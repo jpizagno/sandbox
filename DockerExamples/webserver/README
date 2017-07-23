@@ -8,7 +8,7 @@ MySQL database must be setup.   DDL files can be found in repo/scripts/*ddl*
 sudo docker build -t jpizagno/bookinghandler .
 
 # to run:
-sudo docker run -p 8080:80 -t -i jpizagno/bookinghandler
+sudo docker run -p 8080:80 -t -i jpizagno/bookinghandler  /usr/bin/supervisord
 
 # find webserver at:
 http://localhost:8080/bookingbootstrap/

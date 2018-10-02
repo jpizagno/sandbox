@@ -1,29 +1,33 @@
-see notes at end of this link:
+An example of how to setup Prometheus, Node-Exporter and Grafana in Docker.
+
+See notes at end of this link:
 https://www.digitalocean.com/community/tutorials/how-to-install-prometheus-using-docker-on-ubuntu-14-04
 
-### prometheus
+
+# Prometheus
 
 set your IP_ADDRESS in prometheus.yml
 export IP_ADDRESS=`ip addr show wlan0 | grep -Po 'inet \K[\d.]+' | head -n 1`
 sed -i 's/your_ip_address/'"$IP_ADDRESS"'/' prometheus.yml
 
-# start:
+##### start:
 shell% ./docker_run_prometheus.sh
 
-# after starting, metrics are here
+##### after starting, metrics are here
 http://192.168.2.106:9090/targets
 
-### Node-Exporter
+# Node-Exporter
 Node-Exporter will collect metrics about host system.
 
-# start:
+##### start:
 shell% docker_run_nodeexporter.sh
 
-## run Grafana
+# Grafana
 
 grafana will create dashboards for metrics, and it is already setup for prometheus as a datasource
 
-# setting up Prometheus data source in grafana:
+
+#### setting up Prometheus data source in grafana:
 http://prometheus.io/docs/visualization/grafana/#using
 
 To create a Prometheus data source:
@@ -47,5 +51,5 @@ Follow the standard way of adding a new Grafana graph. Then:
     5) Tune other graph settings until you have a working graph.
 
 
-# run
+##### run
 shell% ./docker_run_grafana.sh

@@ -25,20 +25,24 @@ public class GraphQLEx {
      * @return
      */
     public static ExecutionResult runHelloWorld(String query) {
-        String schema = "type Query{hello: String}";
+        String schema =  "type Query{name: String, age: Int, weight: Float, resident: Boolean}";
 
         SchemaParser schemaParser = new SchemaParser();
         TypeDefinitionRegistry typeDefinitionRegistry = schemaParser.parse(schema);
 
         RuntimeWiring runtimeWiring = newRuntimeWiring()
-                .type("Query", builder -> builder.dataFetcher("hello", new StaticDataFetcher("world")))
+                .type("Query", builder ->
+                        builder.dataFetcher("name", new StaticDataFetcher("jim") )
+                                .dataFetcher("age", new StaticDataFetcher(30) )
+                                .dataFetcher("weight", new StaticDataFetcher(87.7))
+                                .dataFetcher("resident", new StaticDataFetcher(true)))
                 .build();
 
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
 
         GraphQL build = GraphQL.newGraphQL(graphQLSchema).build();
-        ExecutionResult executionResult = build.execute("{hello}");
+        ExecutionResult executionResult = build.execute(query);
 
         return executionResult;
     }

@@ -11,12 +11,12 @@ public class GraphQLExTest {
     @Test
     public void runHelloWorld() {
         // given
-        String query = "{hello}";
+        String query = "{name, age, weight, resident}";
 
         // when
         ExecutionResult executionResult = GraphQLEx.runHelloWorld(query);
 
         // then
-        assertThat(executionResult.getData().toString(), is("{hello=world}"));
+        assertThat(executionResult.getData().toString(), is("{name=jim, age=30, weight=87.7, resident=true}"));
     }
 }

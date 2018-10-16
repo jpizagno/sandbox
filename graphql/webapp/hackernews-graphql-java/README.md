@@ -24,3 +24,16 @@ enter in left-panel of browser:
   }
 }
 ```
+
+
+#### terminology
+A "mutation" in graphql is when data is written, and the mutation describes how that is done.
+Create Link via API call (GraphiQL in-browser IDE)
+```
+mutation createLink {
+  createLink(url:"http://www.otto.de", description:"work website") {
+    url
+    description
+  }
+}
+```

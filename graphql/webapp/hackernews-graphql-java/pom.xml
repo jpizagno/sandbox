@@ -17,6 +17,14 @@
       <scope>test</scope>
     </dependency>
 
+    <!-- mongo db -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver</artifactId>
+      <version>3.4.2</version>
+    </dependency>
+
+    <!-- GraphQL -->
     <dependency>
       <groupId>com.graphql-java</groupId>
       <artifactId>graphql-java</artifactId>

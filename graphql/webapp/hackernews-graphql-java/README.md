@@ -37,3 +37,5 @@ mutation createLink {
   }
 }
 ```
+
+Connectors connect to other systems, be it databases, third-party APIs or alike.

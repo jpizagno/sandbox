@@ -25,6 +25,14 @@ enter in left-panel of browser:
 }
 ```
 
+#### MongoDB
+to start MongoDB in a Container
+```
+shell% mkdir mongo_data
+shell% vi mongo.conf # edit bindIp, comment out to allow all connections
+shell% ./run_mongo.sh
+```
+
 
 #### terminology
 A "mutation" in graphql is when data is written, and the mutation describes how that is done.
@@ -37,5 +45,11 @@ mutation createLink {
   }
 }
 ```
+
+to query data call:
+```
+http://localhost:9999/graphql?query={allLinks{url}}
+```
+
 
 Connectors connect to other systems, be it databases, third-party APIs or alike.

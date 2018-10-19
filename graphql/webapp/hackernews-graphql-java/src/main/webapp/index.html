@@ -114,6 +114,8 @@
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            // line below is obtained by calling the signinUser from GraphiQL
+            'Authorization': 'Bearer 5bca1578a71565174cf311e8',
           },
           body: JSON.stringify(graphQLParams),
           credentials: 'include',

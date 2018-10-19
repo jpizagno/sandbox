@@ -48,7 +48,7 @@ mutation createLink {
 
 To mutate data from the command line:
 ```
-curl -X POST   http://localhost:9999/graphql -H "Content-Type: application/json" -d '{"query": "mutation{createLink(url: \"www.google.com\", description:\"search site\"){url description}}"}'
+curl -X POST   cgraphql -H "Content-Type: application/json" -d '{"query": "mutation{createLink(url: \"www.google.com\", description:\"search site\"){url description}}"}'
 ```
 
 to query data call:
@@ -57,5 +57,25 @@ http://localhost:9999/graphql?query={allLinks{url}}
 http://localhost:9999/graphql?query={allLinks{url,description}}
 ```
 
+To create a User:
+```
+mutation createUser {
+  createUser (name:"james"
+    authProvider:{email:"jpizagno@gmail.com"
+    password:"secret"})
+    {id name}
+}
+
+#later
+mutation signIn {
+  signinUser(auth: {email:"jpizagno@gmail.com", password:"secret"}) {
+    token
+    user {
+      id
+      name
+    }
+  }
+}
+```
 
 Connectors connect to other systems, be it databases, third-party APIs or alike.

@@ -1,18 +1,18 @@
 
-#### reference
+#### Reference
 tutorial from
 https://www.howtographql.com/graphql-java/1-getting-started/
 
-#### run
+#### Run
 You can run the app just by executing the run script:
 ```
 shell% ./run.sh
 ```
 
-#### issues
+#### Issues
 This project only seems to run with old version of graphql* in the pom.xml.
 
-#### testing
+#### Testing
 in-browser IDE for exploring GraphQL:
 http://localhost:9999/
 
@@ -34,7 +34,7 @@ shell% ./run_mongo.sh
 ```
 
 
-#### terminology
+#### Terminology
 A "mutation" in graphql is when data is written, and the mutation describes how that is done.
 Create Link via API call (GraphiQL in-browser IDE)
 ```
@@ -46,9 +46,15 @@ mutation createLink {
 }
 ```
 
+To mutate data from the command line:
+```
+curl -X POST   http://localhost:9999/graphql -H "Content-Type: application/json" -d '{"query": "mutation{createLink(url: \"www.google.com\", description:\"search site\"){url description}}"}'
+```
+
 to query data call:
 ```
 http://localhost:9999/graphql?query={allLinks{url}}
+http://localhost:9999/graphql?query={allLinks{url,description}}
 ```
 
 

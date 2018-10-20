@@ -69,11 +69,99 @@ mutation createUser {
 #later
 mutation signIn {
   signinUser(auth: {email:"jpizagno@gmail.com", password:"secret"}) {
-    token
+    token  # token here can be hard-coded in index.html for testing
     user {
       id
       name
     }
+  }
+}
+# answer
+#{
+#  "data": {
+#    "signinUser": {
+#      "token": "5bca1578a71565174cf311e8",
+#      "user": {
+#        "id": "5bca1578a71565174cf311e8",
+#        "name": "james"
+#      }
+#    }
+#  }
+#}
+```
+
+#### Vote
+To vote, get your UserId from siningUser above, and from list allinks:
+```
+{
+  allLinks {
+    url
+    id
+  }
+}
+# Answer
+#{
+#  "data": {
+#    "allLinks": [
+#      {
+#        "url": "http://www.otto.de",
+#        "id": "5bc7871d2aafb32247cce393"
+#      },
+#      {
+#        "url": "http://www.chefslittlehelper.com",
+#        "id": "5bc787322aafb32247cce394"
+#      },
+#      {
+#        "url": "https://en.wikipedia.org/wiki/BoJack_Horseman",
+#        "id": "5bca2bd2a715651e5b341eef"
+#      }
+#    ]
+#  }
+#}
+```
+Then vote with above linkID and User ID:
+```
+mutation vote {
+  createVote(
+    linkId: "5bc7871d2aafb32247cce393"
+    userId:"5bca1578a71565174cf311e8") {
+    
+    id
+    createdAt 
+    link {
+    	url
+  	}
+  	user {
+    	name
+  	}
+  }
+}
+#Answer:
+#{
+#  "data": {
+#    "createVote": {
+#      "id": "5bcada6450a7c2364b4aa69e",
+#      "createdAt": "2018-10-20T07:33:56.273Z",
+#      "link": {
+#        "url": "5bc7871d2aafb32247cce393"
+#      },
+#      "user": {
+#        "name": "james"
+#      }
+#    }
+#  }
+#}
+```
+
+to query votes:
+```
+{
+  allVotes {
+    id
+    createdAt
+   user {
+     id
+   }
   }
 }
 ```

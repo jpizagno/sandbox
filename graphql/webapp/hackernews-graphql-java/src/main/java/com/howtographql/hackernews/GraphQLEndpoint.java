@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import graphql.ExceptionWhileDataFetching;
+import graphql.GraphQLError;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.GraphQLContext;
 import graphql.servlet.SimpleGraphQLServlet;
 import org.bson.Document;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * This class with import graphql.servlet.SimpleGraphQLServlet; seems to work with graphql-java-servlet and lower.
@@ -69,4 +73,24 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
         return new AuthContext(user, request, response);
     }
 
+
+    /**
+     * Wrap all data-fetching exceptions by overriding filterGraphQLErrors
+     * This way, in addition to the syntactical and validation errors, data-fetching errors will have precise messages
+     * sent to the client, but without the gritty details. All other error types will still be hidden behind a
+     * generic message.
+     *
+     * Ex:  When somebody enters wrong password in Mutation signIn() then this message is seen:
+     *      "message": "Exception while fetching data: Invalid credentials"
+     *
+     * @param errors
+     * @return  List of Errors
+     */
+    @Override
+    protected List<GraphQLError> filterGraphQLErrors(List<GraphQLError> errors) {
+        return errors.stream()
+                .filter(e -> e instanceof ExceptionWhileDataFetching || super.isClientError(e))
+                .map(e -> e instanceof ExceptionWhileDataFetching ? new SanitizedError((ExceptionWhileDataFetching) e) : e)
+                .collect(Collectors.toList());
+    }
 }

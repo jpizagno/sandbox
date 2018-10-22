@@ -15,8 +15,8 @@ public class Query implements GraphQLRootResolver {
         this.voteRepository = voteRepository;
     }
 
-    public List<Link> allLinks() {
-        return linkRepository.getAllLinks();
+    public List<Link> allLinks(LinkFilter filter) {
+        return linkRepository.getAllLinks(filter);
     }
 
     public List<Vote> allVotes() { return voteRepository.getAllVotes(); }

@@ -166,4 +166,24 @@ to query votes:
 }
 ```
 
+to filter links in query:
+```
+query links {
+  allLinks(filter: {description_contains:"chef" }) {
+    url
+    description
+  }
+}
+#{
+#  "data": {
+#    "allLinks": [
+#      {
+#        "url": "5bc787322aafb32247cce394",
+#        "description": "http://www.chefslittlehelper.com"
+#      }
+#    ]
+#  }
+#}
+```
+
 Connectors connect to other systems, be it databases, third-party APIs or alike.

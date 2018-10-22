@@ -186,4 +186,14 @@ query links {
 #}
 ```
 
+To Page through the data:
+```
+query links {
+  allLinks(skip:1 , first:1) {
+    url
+    description
+  }
+}
+```
+
 Connectors connect to other systems, be it databases, third-party APIs or alike.

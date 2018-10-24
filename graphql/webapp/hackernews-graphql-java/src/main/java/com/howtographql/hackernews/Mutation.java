@@ -3,6 +3,8 @@ package com.howtographql.hackernews;
 import com.coxautodev.graphql.tools.GraphQLRootResolver;
 import graphql.GraphQLException;
 import graphql.schema.DataFetchingEnvironment;
+import io.leangen.graphql.annotations.GraphQLMutation;
+import io.leangen.graphql.annotations.GraphQLRootContext;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -41,8 +43,8 @@ public class Mutation implements GraphQLRootResolver {
     }
 
     //The way to inject the context is via DataFetchingEnvironment
-    public Link createLink(String url, String description, DataFetchingEnvironment env) {
-        AuthContext context = env.getContext();
+    @GraphQLMutation
+    public Link createLink(String url, String description, @GraphQLRootContext AuthContext context) {  // You can inject the AuthContext directly via @GraphQLRootContext
         Link newLink = new Link(url, description, context.getUser().getId());
         linkRepository.saveLink(newLink);
         return newLink;

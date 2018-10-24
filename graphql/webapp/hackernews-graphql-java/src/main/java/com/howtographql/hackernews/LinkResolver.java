@@ -1,8 +1,10 @@
 package com.howtographql.hackernews;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
 
-public class LinkResolver implements GraphQLResolver<Link> {
+import io.leangen.graphql.annotations.GraphQLContext;
+import io.leangen.graphql.annotations.GraphQLQuery;
+
+public class LinkResolver {
 
     private final UserRepository userRepository;
 
@@ -10,7 +12,8 @@ public class LinkResolver implements GraphQLResolver<Link> {
         this.userRepository = userRepository;
     }
 
-    public User postedBy(Link link) {
+    @GraphQLQuery  // @GraphQLContext is used to wire external methods into types.
+    public User postedBy(@GraphQLContext Link link) {
         if (link.getUserId() == null) {
             return null;
         }

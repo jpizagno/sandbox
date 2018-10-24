@@ -13,6 +13,7 @@ import graphql.GraphQLError;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.GraphQLContext;
 import graphql.servlet.SimpleGraphQLServlet;
+import io.leangen.graphql.GraphQLSchemaGenerator;
 import org.bson.Document;
 
 import java.util.List;
@@ -49,17 +50,13 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
     }
 
     private static GraphQLSchema buildSchema() {
-        return SchemaParser.newParser()
-                .file("schema.graphqls")
-                .resolvers(
-                        new Query(linkRepository , voteRepository),
-                        new Mutation(linkRepository, userRepository, voteRepository),
-                        new SigninResolver(),
-                        new LinkResolver(userRepository),
-                        new VoteResolver(linkRepository, userRepository)) //new resolver
-                .scalars(Scalars.dateTime) //register the new scalar
-                .build()
-                .makeExecutableSchema();
+        Query query = new Query(linkRepository, voteRepository); //create or inject the service beans
+        LinkResolver linkResolver = new LinkResolver(userRepository);
+        Mutation mutation = new Mutation(linkRepository, userRepository, voteRepository);
+
+        return new GraphQLSchemaGenerator()
+                .withOperationsFromSingletons(query, linkResolver, mutation) //register the beans
+                .generate(); 
     }
 
     @Override

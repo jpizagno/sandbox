@@ -56,7 +56,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
 
         return new GraphQLSchemaGenerator()
                 .withOperationsFromSingletons(query, linkResolver, mutation) //register the beans
-                .generate(); 
+                .generate();
     }
 
     @Override

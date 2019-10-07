@@ -1,0 +1,25 @@
+type Link {
+  id: ID!
+  url: String!
+  description: String!
+}
+
+
+type Query {
+  allLinks: [Link]
+  allLinksFiltered(filter: LinkFilter, skip: Int = 0, first: Int = 0): [Link]
+}
+
+type Mutation {
+  createLink(url: String!, description: String! ): Link
+}
+
+input LinkFilter {
+  description_contains: String
+  url_contains: String
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

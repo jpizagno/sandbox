@@ -24,7 +24,7 @@ shell% run.sh
 ```
 
 ### Configure Nginx
-Configure Nginx to send each request (via round-robin) to each container above.
+Configure Nginx to send each request (via round-robin) to a different container above.
 To do that we need the host:port information.
 
 Get port of each container from Docker:

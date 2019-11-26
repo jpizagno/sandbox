@@ -1,7 +1,7 @@
 
 
 ### Build
-start each container with a container
+build and run each container
 
 ```bash
 shell% cd ./example1/
@@ -10,13 +10,13 @@ shell% run.sh
 ```
 
 ```bash
-shell% cd ./example2/
+shell% cd ../example2/
 shell% build.sh
 shell% run.sh
 ```
 
 ```bash
-shell% cd ./example3/
+shell% cd ../example3/
 shell% build.sh
 shell% run.sh
 ```
@@ -25,7 +25,7 @@ shell% run.sh
 Configure Nginx to send each request (via round-robin) to each container above.
 To do that we need the host:port information.
 
-Get ports of containers from Docker:
+Get port of each container from Docker:
 ```bash
 shell% docker ps 
 CONTAINER ID        IMAGE                        COMMAND                  CREATED              STATUS              PORTS                   NAMES
@@ -36,7 +36,7 @@ cb1af8354f16        0b18592f0be6                 "nginx -g 'daemon of…"   2 mi
 
 Set ports in Nginx config:
 ```bash
-shell% vi ./conf/nginx.conf  # make sure port numbers are correct
+shell% vi ../conf/nginx.conf  # make sure port numbers are correct
 ...
 http {
     upstream myapp1 {
@@ -50,12 +50,12 @@ http {
 
 ### Start Nginx
 ```bash
-shell% cd ../
-shell% build.sh
-shell% run.sh
+cd ../
+build.sh
+run.sh
 ```
 
-You should see all 4 containers (1Nginx, 3 Apps) running:
+You should see all 4 containers (1 Nginx, 3 Apps) running:
 ```bash
 shell% docker ps 
 CONTAINER ID        IMAGE                        COMMAND                  CREATED              STATUS              PORTS                   NAMES

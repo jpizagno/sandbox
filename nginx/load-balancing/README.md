@@ -50,7 +50,7 @@ http {
 
 ### Start Nginx
 ```bash
-cd ./
+cd ../
 build.sh
 run.sh
 ```

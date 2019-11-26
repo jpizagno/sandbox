@@ -50,9 +50,9 @@ http {
 
 ### Start Nginx
 ```bash
-cd ../
-build.sh
-run.sh
+shell% d ../
+shell% build.sh
+shell% run.sh
 ```
 
 You should see all 4 containers (1Nginx, 3 Apps) running:

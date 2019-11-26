@@ -1,22 +1,24 @@
 
 
 ### Build
-build and run each container
+Build and run each container. Each container is an example of a replicated service.
+For display purposes, each container is not exactly replicated because the html header is different.  This allows one 
+to see from the browser how Nginx balances the requests by sending the request to different containers.
 
 ```bash
-shell% cd ./example1/
+shell% cd ./service-replicated1/
 shell% build.sh
 shell% run.sh 
 ```
 
 ```bash
-shell% cd ../example2/
+shell% cd ../service-replicated2/
 shell% build.sh
 shell% run.sh
 ```
 
 ```bash
-shell% cd ../example3/
+shell% cd ../service-replicated3/
 shell% build.sh
 shell% run.sh
 ```
@@ -50,9 +52,9 @@ http {
 
 ### Start Nginx
 ```bash
-cd ../
-build.sh
-run.sh
+shell% cd ../
+shell% build.sh
+shell% run.sh
 ```
 
 You should see all 4 containers (1 Nginx, 3 Apps) running:

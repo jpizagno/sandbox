@@ -72,6 +72,7 @@ public class LinkRepository {
         return new Link(
                 doc.get("_id").toString(),
                 doc.getString("url"),
-                doc.getString("description"));
+                doc.getString("description"),
+                doc.getString("postedBy"));
     }
 }

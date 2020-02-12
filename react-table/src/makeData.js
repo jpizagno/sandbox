@@ -9,26 +9,32 @@ const range = len => {
 };
 
 const newPerson = () => {
-  const politicsChance = Math.random();
-  const envChance = Math.random();
+  const chanceNumber = Math.random();
   return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    politics:
-      politicsChance > 0.66
-        ? "Politician Election"
-        : politicsChance > 0.33
+    source: 
+      chanceNumber > 0.75 
+        ? "cnn"
+        : chanceNumber > 0.5 
+        ? "Fox"
+        : "Breitbart",
+    link: 
+      chanceNumber > 0.75 
+        ? "http://www.cnn.com/"
+        : chanceNumber > 0.5 
+        ? "http://www.foxnews.com/"
+        : "http://www.breitbart.com/",
+    linkname: 
+      chanceNumber > 0.75 
+        ? "cnn title 1"
+        : chanceNumber > 0.5 
+        ? "fox title 2"
+        : "breitbart title 3",
+    topic:
+      chanceNumber > 0.66
+        ? "topic1"
+        : chanceNumber > 0.33
         ? "Caucuas"
-        : "Election 2020" ,
-    environment:
-      envChance > 0.66
-        ? "Australia Fires"
-        : envChance > 0.33
-        ? "Garbage NYC"
-        : "Fresh Water"
+        : "Election 2020" 
   };
 };
 

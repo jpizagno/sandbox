@@ -4,7 +4,8 @@ import { useTable, useFilters, useGlobalFilter } from 'react-table'
 // A great library for fuzzy filtering/sorting items
 import matchSorter from 'match-sorter'
 
-import makeData from './makeData'
+import makeData from './makeData';
+
 
 const Styles = styled.div`
   padding: 1rem;
@@ -331,54 +332,31 @@ function filterGreaterThan(rows, id, filterValue) {
 // check, but here, we want to remove the filter if it's not a number
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
+
 function App() {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'First Name',
-        accessor: 'firstName',
+        Header: 'Source',
+        accessor: 'source',
         disableFilters: true
       },
       {
-        Header: 'Last Name',
-        accessor: 'lastName',
-        // Use our custom `fuzzyText` filter on this column
-        //filter: 'fuzzyText',
-        disableFilters: true
+        Header: 'Title',
+        accessor: 'link',
+        disableFilters: true, 
+        Cell: ({ row }) => {
+          return (
+            <a href={row.original.link}>{row.original.linkname}</a> 
+          );
+        }
       },
       {
-        Header: 'Age',
-        accessor: 'age',
-        //Filter: SliderColumnFilter,
-        //filter: 'equals',
-        disableFilters: true
-      },
-      {
-        Header: 'Visits',
-        accessor: 'visits',
-        //Filter: NumberRangeColumnFilter,
-        //filter: 'between',
-        disableFilters: true
-      },
-      {
-        Header: 'Politics',
-        accessor: 'politics',
+        Header: 'Topic',
+        accessor: 'topic',
         Filter: SelectColumnFilter,
         filter: 'includes',
-      },
-      {
-        Header: 'Environment',
-        accessor: 'environment',
-        Filter: SelectColumnFilter,
-        filter: 'includes',
-      },
-      {
-        Header: 'Profile Progress',
-        accessor: 'progress',
-        //Filter: SliderColumnFilter,
-        //filter: filterGreaterThan,
-        disableFilters: true
-      },
+      }
     ],
     []
   )

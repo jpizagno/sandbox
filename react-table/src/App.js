@@ -333,7 +333,10 @@ function filterGreaterThan(rows, id, filterValue) {
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
 
-function App() {
+function App(props)  {
+
+  console.log("props.data = " + props.data);
+
   const columns = React.useMemo(
     () => [
       {
@@ -361,7 +364,7 @@ function App() {
     []
   )
 
-  const data = React.useMemo(() => makeData(100000), [])
+  const data = React.useMemo(() => props.data, []) // makeData(100000), [])
 
   return (
     <Styles>

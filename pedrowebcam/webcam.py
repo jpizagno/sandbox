@@ -12,9 +12,9 @@ log = logging.getLogger(__name__)
 
 if __name__ == '__main__':
     while True:
-        time.sleep(10)
+        time.sleep(7)
         log.info("taking a shot...")
-        os.system("fswebcam -r 640x480 --jpeg 85 -D 1 /tmp/webcamfiles/web-cam-shot.jpg")
-        os.system("aws s3 sync /tmp/webcamfiles/ s3://pizagno-pedro --acl public-read")
+        os.system("fswebcam -r 640x480 --jpeg 85 -D 1 /home/jpizagno/webcamfiles/web-cam-shot.jpg")
+        os.system("aws s3 sync /home/jpizagno/webcamfiles/ s3://pizagno-pedro --acl public-read")
         log.info("took a shot and aws-s3-sync ed")
         log.info(" ")

@@ -92,3 +92,45 @@ services:
       - "kafka"
     ports:
       - 3000:3000
+
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    hostname: cassandra
+    ports:
+      - "9042:9042"
+    environment:
+      - "MAX_HEAP_SIZE=256M"
+      - "HEAP_NEWSIZE=128M"
+    restart: always
+    volumes:
+      - ./cassandra_out/cassandra_data:/var/lib/cassandra
+
+  cassandra-load-keyspace:
+    container_name: cassandra-load-keyspace
+    image: cassandra:latest
+    depends_on:
+      - cassandra
+    volumes:
+      - ./cassandra/keyspace_ddl.cql:/keyspace_ddl.cql
+    command: /bin/bash -c "sleep 60 && echo loading cassandra keyspace && cqlsh cassandra -f /keyspace_ddl.cql"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  log-persister:
+    build: ./log-persister
+    container_name: log-persister
+    hostname: log-persister
+    depends_on:
+      - kafka
+      - cassandra
+    deploy:
+      restart_policy:
+        condition: always
+        delay: 30s
+        max_attempts: 3
+        window: 120s

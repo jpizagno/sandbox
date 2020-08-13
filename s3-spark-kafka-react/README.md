@@ -1,3 +1,13 @@
+This project monitors a S3 bucket for new log files, then persists and displays the data.
+
+A Spark job in log-streamer/ will monitor an S3 bucket, when a new file comes, with send the line-text into a kafka topic="log-streamer-out".  
+
+Kafka is in kafka/ , and there is a manager in kafka-manger.  A kafka proxy server is in kafka-proxy-ws/ which provides a server for the websocket in the frontend/ app.  
+
+The log lines, in the Kafka topic="log-streamer-out", are persisted to Cassandra (cassandra/ ) by the app log-persister/.
+
+Nothing happends until a file is uploaded to the S3 bucket.  
+
 
 ### Build and Run
 One needs to build the spark-base image:

@@ -83,3 +83,12 @@ services:
       - "kafka"
     ports:
       - 9998:9998
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    hostname: frontend
+    depends_on:
+      - "kafka"
+    ports:
+      - 3000:3000

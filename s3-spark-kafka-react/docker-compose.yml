@@ -74,3 +74,12 @@ services:
       - ZK_HOSTS=kafka:2188
     depends_on:
       - "kafka"
+
+  kafka-proxy:
+    build: ./kafka-proxy-ws
+    container_name: kafkaproxy
+    hostname: kafkaproxy
+    depends_on:
+      - "kafka"
+    ports:
+      - 9998:9998

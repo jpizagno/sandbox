@@ -6,24 +6,11 @@ import org.apache.spark.streaming._
 import java.util.Properties
 import org.apache.kafka.clients.producer._
 
-/**
-  * Use this to test the app locally, from sbt:
-  * sbt "run inputFile.txt outputFile.txt"
-  *  (+ select CountingLocalApp when prompted)
-  */
-object CountingLocalApp extends App{
-  val (myAccessKey, mySecretKey, bucketName) = (args(0), args(1), args(2))
-  val conf = new SparkConf()
-    .setMaster("local")
-    .setAppName("my awesome app")
-
-  Runner.run(conf, myAccessKey, mySecretKey, bucketName)
-}
 
 /**
   * Use this when submitting the app to a cluster with spark-submit
   * */
-object CountingApp extends App {
+object LogStreamingApp extends App {
   val (myAccessKey, mySecretKey, bucketName) = (args(0), args(1), args(2))
   println(" ************ read bucketName = " + bucketName)
 
@@ -60,7 +47,6 @@ object Runner extends Serializable {
 
     val kafkaBootstrapServer: String = "kafka:9092"
     val topic: String = "log-streamer-out"
-    //val producer: DemoProducer = new DemoProducer(kafkaBootstrapServer)
 
     // Scala kafka
     val  props = new Properties()
@@ -74,9 +60,8 @@ object Runner extends Serializable {
       producer.send(record)
     }))
 
-
-
     ssc.start()             // Start the computation
     ssc.awaitTermination()  // Wait for the computation to terminate
   }
+
 }

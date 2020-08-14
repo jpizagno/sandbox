@@ -1,4 +1,4 @@
-*This project has been migrated to another repo:*
+# This project has been migrated to another repo:
 https://github.com/jpizagno/s3-spark-kafka-cassandra-react.git
 
 This project monitors a S3 bucket for new log files, then persists and displays the data.

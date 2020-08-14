@@ -1,3 +1,6 @@
+*This project has been migrated to another repo:*
+https://github.com/jpizagno/s3-spark-kafka-cassandra-react.git
+
 This project monitors a S3 bucket for new log files, then persists and displays the data.
 
 A Spark job in log-streamer/ will monitor an S3 bucket, when a new file comes, with send the line-text into a kafka topic="log-streamer-out".  

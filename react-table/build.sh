@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build --tag table_example .
+docker build --tag jpizagno_table_example .

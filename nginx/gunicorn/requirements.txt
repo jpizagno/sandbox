@@ -7,7 +7,7 @@ asyncio==3.4.3
 gunicorn==19.9.0
 pyyaml
 
-tensorflow==2.5.1
+tensorflow==2.5.3
 pytesseract==0.2.7
 
 python-dotenv==0.10.1

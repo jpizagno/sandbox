@@ -18,9 +18,9 @@ sed -i.bak "s/TableName:.*/TableName: '$dynamodb_table_name' /g" lambda/function
 echo " packaging Lambda function .... "
 cd lambda/functions/
 zip lambda_function_payload.zip index.js
-mv lambda_function_payload.zip ../../
+mv lambda_function_payload.zip ../../deploy/
 cd ../../
 
 echo " Deploying via Terraform....."
-terraform init deploy/
-terraform apply -var 'access_key='$access_key'' -var 'secret_key='$secret_key'' -var 'dynamodb_table_name='$dynamodb_table_name'' deploy
+terraform -chdir=./deploy/ init 
+terraform -chdir=./deploy/ apply -auto-approve -var 'access_key='$access_key'' -var 'secret_key='$secret_key'' -var 'dynamodb_table_name='$dynamodb_table_name'' 

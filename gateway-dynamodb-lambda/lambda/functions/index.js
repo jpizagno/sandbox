@@ -13,7 +13,7 @@ exports.handler =  function(e, ctx, callback) {
                 message: message.message
             },
 
-            TableName: 'mailgunubuntu'
+            TableName: 'delme_jm_table' 
         };   
 
        docClient.put(params, function(err, data) {

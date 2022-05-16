@@ -79,6 +79,6 @@ SUCCESS. POSTed mailgun message to API
 
 ## Requirements
 The requirements are as follows.
-* Terraform v0.12.9
+* Terraform v1.1.9
 * Python 2.7+
 * AWS ROLE* (i.e. admin on AWS to build system.)

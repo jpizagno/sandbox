@@ -39,7 +39,7 @@ resource "aws_lambda_function" "dynamodb_write2" {
   handler       = "index.handler"
 
   source_code_hash = "${filebase64sha256("lambda_function_payload.zip")}"
-  runtime = "nodejs10.x"
+  runtime = "nodejs12.x"
 }
 
 

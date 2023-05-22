@@ -11,7 +11,7 @@ tensorflow==2.5.1
 pytesseract==0.2.7
 
 python-dotenv==0.10.1
-requests==2.21.0
+requests==2.31.0
 python-magic==0.4.15
 grpcio==1.22.0
 

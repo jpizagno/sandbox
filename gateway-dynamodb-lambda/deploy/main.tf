@@ -1,5 +1,5 @@
 provider "aws" {
-  version = "~> 2.7"
+  version = "~> 5.9.0"
   access_key = "${var.access_key}"  # from variables.tf
   secret_key = "${var.secret_key}" # from variables.tf
   region     = "${var.region}"  # from variables.tf
@@ -39,7 +39,7 @@ resource "aws_lambda_function" "dynamodb_write2" {
   handler       = "index.handler"
 
   source_code_hash = "${filebase64sha256("lambda_function_payload.zip")}"
-  runtime = "nodejs12.x"
+  runtime = "nodejs18.x"
 }
 
 

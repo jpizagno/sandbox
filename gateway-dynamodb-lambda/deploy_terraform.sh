@@ -13,7 +13,7 @@ export TF_LOG=INFO
 export TF_LOG_PATH=./terraform.log 
 
 echo " setting DynamoDB Table name ...."
-sed -i.bak "s/TableName:.*/TableName: '$dynamodb_table_name' /g" lambda/functions/index.js
+sed -i.bak 's/"TableName":.*/"TableName": "'$dynamodb_table_name'" /g' lambda/functions/index.js
 
 echo " packaging Lambda function .... "
 cd lambda/functions/
@@ -22,5 +22,5 @@ mv lambda_function_payload.zip ../../deploy/
 cd ../../
 
 echo " Deploying via Terraform....."
-terraform -chdir=./deploy/ init 
+terraform -chdir=./deploy/ init -upgrade
 terraform -chdir=./deploy/ apply -auto-approve -var 'access_key='$access_key'' -var 'secret_key='$secret_key'' -var 'dynamodb_table_name='$dynamodb_table_name'' 

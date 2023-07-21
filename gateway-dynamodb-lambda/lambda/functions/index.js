@@ -1,36 +1,51 @@
-console.log('starting function');
+const { DynamoDB, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const docClient = new DynamoDB({region: 'eu-central-1'});
 
-const AWS = require('aws-sdk');
-const docClient = new AWS.DynamoDB.DocumentClient({region: 'eu-central-1'});
-
-exports.handler =  function(e, ctx, callback) {
+exports.handler =  async function(e, ctx, callback) {
     try {
         var message = JSON.parse(e.body);
     
-        var params = {
-            Item: {
-                id: message.id,
-                message: message.message
+        const input = {
+          "Item": {
+            "id": {
+              "S": message.id
             },
-
-            TableName: 'delme_jm_table' 
-        };   
-
-       docClient.put(params, function(err, data) {
-            if (err) {
-                callback(err, null);
-            } else {
-                var response = {
-                    statusCode: 200,
-                    headers: {
-                      'Content-Type': 'text/html; charset=utf-8'
-                    },
-                    body: '<p>Updating Table Success</p>'
-                  }
-                callback(null, response);
+            "message": {
+              "S": message.message
             }
-       });
-    } catch (e) {
-        callback("not parsible json"+e)
+          },
+          "ReturnConsumedCapacity": "TOTAL",
+          "TableName": "moonlightingtable" 
+        };
+
+        const command = new PutItemCommand(input);
+        const response = await docClient.send(command)
+        try {
+            const code = response.$metadata.httpStatusCode
+            if (code === 200) {
+                var httpResponse = {
+                    statusCode: code,
+                    headers: {
+                        'Content-Type': 'text/html; charset=utf-8'
+                    },
+                    body: '<p>Insert Table Success</p>'
+                    }
+                callback(null, httpResponse);
+            } else {
+                var httpResponse = {
+                    statusCode: 500,
+                    headers: {
+                        'Content-Type': 'text/html; charset=utf-8'
+                    },
+                    body: '<p>Could not update table</p>'
+                    }
+                callback(null, httpResponse);
+            }
+        
+        } catch (err) {
+        callback("error in response: e="+e)
     }
-}
+    } catch (err) {
+      callback("error parsing input body. err="+err)
+    }
+};

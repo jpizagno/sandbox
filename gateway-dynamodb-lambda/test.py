@@ -24,7 +24,7 @@ def _get_base_url():
     """
     base_url = ""
 
-    with open('terraform.tfstate') as json_file:
+    with open('./deploy/terraform.tfstate') as json_file:
         data = json.load(json_file)
         try:
             base_url = str(data['outputs']['base_url']['value'])
